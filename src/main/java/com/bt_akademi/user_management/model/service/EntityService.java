@@ -6,9 +6,6 @@ public interface EntityService<E, I> {
 
     List<E> getAll();
 
-
-    E findByID(I id);
-
     E save(E entity);
 
     void deleteById(I id);
