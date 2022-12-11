@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService extends AbstractUserService{
 
     @Override
-    protected User findByUsername(String username) {
-        return userRepository.findByUserName(username);
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override
@@ -22,22 +23,23 @@ public class UserService extends AbstractUserService{
     }
 
     @Override
-    public User save(User user) {
+    public User save(User user)
+    {
         try {
-
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setCreated(new Date());
 
             return userRepository.save(user);
-        }catch (IllegalArgumentException e){
+        }
+        catch (IllegalArgumentException e) {
             Util.showGeneralExceptionInfo(e);
             return null;
-        }catch (OptimisticLockingFailureException e){
+        }
+        catch (OptimisticLockingFailureException e) {
             Util.showGeneralExceptionInfo(e);
             return null;
         }
     }
-
     @Override
     public void deleteById(Integer userID) {
         try {

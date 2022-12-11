@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
+import java.util.Optional;
 
 public abstract class AbstractUserService implements EntityService<User,Integer> {
 
@@ -15,5 +16,5 @@ public abstract class AbstractUserService implements EntityService<User,Integer>
     @Autowired
     protected UserRepository userRepository;
 
-    protected abstract User findByUsername(String username);
+    public abstract Optional<User> findByUsername(String username);
 }
